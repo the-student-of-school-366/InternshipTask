@@ -2,8 +2,6 @@ package dto
 
 import "time"
 
-// DTO для работы с Pull Request.
-
 type CreatePullRequestRequest struct {
 	PullRequestID   string `json:"pull_request_id" binding:"required"`
 	PullRequestName string `json:"pull_request_name" binding:"required"`
@@ -35,5 +33,3 @@ type PullRequestShortDTO struct {
 	AuthorID        string `json:"author_id"`
 	Status          string `json:"status"`
 }
-
-

@@ -123,7 +123,6 @@ func TestService_MergeIsIdempotent(t *testing.T) {
 
 	svc := NewService(repo, userR, teamR)
 
-	// first merge
 	pr, err := svc.Merge(context.Background(), "pr-1")
 	if err != nil {
 		t.Fatalf("Merge() error = %v", err)
@@ -133,7 +132,6 @@ func TestService_MergeIsIdempotent(t *testing.T) {
 	}
 	firstMergedAt := *pr.MergedAt
 
-	// second merge: idempotent, no error, same status
 	pr2, err := svc.Merge(context.Background(), "pr-1")
 	if err != nil {
 		t.Fatalf("second Merge() error = %v", err)

@@ -228,7 +228,6 @@ func TestGetUserReviewsHandler_Success(t *testing.T) {
 func TestCreatePullRequestHandler_Success(t *testing.T) {
 	r, teamStorage, userStorage, prRepo := buildRouter()
 
-	// подготовим команду и автора
 	teamStorage.teamByName = map[string]team.Team{
 		"backend": {
 			TeamName: "backend",
@@ -262,7 +261,6 @@ func TestCreatePullRequestHandler_Success(t *testing.T) {
 func TestMergePullRequestHandler_Success(t *testing.T) {
 	r, _, _, prRepo := buildRouter()
 
-	// заранее создадим PR
 	prRepo.prByID = map[string]*pull_request.PR{
 		"pr-1": pull_request.NewPR("pr-1", "Test", "author", pull_request.OPEN),
 	}

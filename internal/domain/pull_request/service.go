@@ -23,7 +23,6 @@ type Repository interface {
 	GetByID(ctx context.Context, id string) (*PR, error)
 	Update(ctx context.Context, pr *PR) error
 	GetByReviewerID(ctx context.Context, reviewerID string) ([]PullRequestShort, error)
-	// Для статистики по назначенным ревьюверам.
 	GetReviewerStats(ctx context.Context) (map[string]int64, error)
 }
 
@@ -60,7 +59,6 @@ func (s *Service) Create(ctx context.Context, id, name, authorID string) (*PR, e
 
 	author, err := s.userReader.GetByID(ctx, authorID)
 	if err != nil {
-		// Соответствует 404 Автор/команда не найдены.
 		return nil, fmt.Errorf("get author: %w", err)
 	}
 
@@ -88,7 +86,6 @@ func (s *Service) Merge(ctx context.Context, id string) (*PR, error) {
 	}
 
 	if pr.Status == MERGED {
-		// Идемпотентность — просто возвращаем текущее состояние.
 		return pr, nil
 	}
 
@@ -152,7 +149,6 @@ func (s *Service) GetByReviewerID(ctx context.Context, userID string) ([]PullReq
 	return s.repo.GetByReviewerID(ctx, userID)
 }
 
-// ReviewerStats возвращает статистику "user_id -> количество назначений ревьювером".
 func (s *Service) ReviewerStats(ctx context.Context) (map[string]int64, error) {
 	return s.repo.GetReviewerStats(ctx)
 }

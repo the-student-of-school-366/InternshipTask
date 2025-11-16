@@ -1,5 +1,3 @@
--- Initial schema for PR reviewer assignment service
-
 CREATE TABLE IF NOT EXISTS teams (
     team_name TEXT PRIMARY KEY
 );
